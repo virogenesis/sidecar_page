@@ -1,7 +1,17 @@
-import Head from "next/head";
-import SEO from "./seo";
+"use client"
+
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [showUnderscore, setShowUnderscore] = useState(true);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowUnderscore(prev => !prev);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="resizeme">
         <svg
@@ -19,7 +29,10 @@ export default function Home() {
                 dominantBaseline="middle"
                 textAnchor="middle"
                 fontFamily="rift-soft, sans-serif"
-              >SIDECAR_</text>
+              >SIDECAR
+              <tspan dx="0" dy="-9" visibility={showUnderscore ? "visible": "hidden"}>_</tspan>
+              </text>
+              
             </svg>
     </div>
   );
